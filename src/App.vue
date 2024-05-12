@@ -33,67 +33,69 @@ const getWeather = async () => {
 <template>
   <ALayout>
     <ALayoutContent class="content">
-      <div class="wrapper">
-        <ATypographyTitle class="title">Weather in {{ cityName }}</ATypographyTitle>
-        <AForm @submit="getWeather">
-          <AInput placeholder="Enter city" v-model:value="city"/>
-        </AForm>
-        <AList v-if="info" bordered>
-          <AListItem>
-            <AListItemMeta>
-              <template #avatar>
-                <img
-                  :src="`https://openweathermap.org/img/w/${info.weather[0].icon}.png`"
-                  :alt="info.weather[0].description"
-                  width="32px"
-                  height="32px"
-                >
-              </template>
-              <template #title>
-                <span class="description">{{ info.weather[0].description }}</span>
-              </template>
-              <template #description>{{ info.main.temp }} °C</template>
-            </AListItemMeta>
-          </AListItem>
-          <AListItem>
-            <AListItemMeta>
-              <template #avatar>
-                <IconThermometer/>
-              </template>
-              <template #title>Feels like</template>
-              <template #description>{{ info.main.feels_like }} °C</template>
-            </AListItemMeta>
-          </AListItem>
-          <AListItem>
-            <AListItemMeta>
-              <template #avatar>
-                <IconThermometerExterior/>
-              </template>
-              <template #title>Min/Max</template>
-              <template #description>{{ info.main.temp_min }}/{{ info.main.temp_max }} °C</template>
-            </AListItemMeta>
-          </AListItem>
-          <AListItem>
-            <AListItemMeta>
-              <template #avatar>
-                <IconHumidity/>
-              </template>
-              <template #title>Humidity</template>
-              <template #description>{{ info.main.humidity }} %</template>
-            </AListItemMeta>
-          </AListItem>
-          <AListItem>
-            <AListItemMeta>
-              <template #avatar>
-                <IconWind/>
-              </template>
-              <template #title>Wind</template>
-              <template #description>{{ info.wind.speed }} m/s</template>
-            </AListItemMeta>
-          </AListItem>
-        </AList>
-        <ASkeleton v-else :loading="isLoading" active avatar/>
-      </div>
+      <ACard class="wrapper">
+        <div class="inner">
+          <ATypographyTitle class="title">Weather in {{ cityName }}</ATypographyTitle>
+          <AForm @submit="getWeather">
+            <AInput placeholder="Enter city" v-model:value="city"/>
+          </AForm>
+          <AList v-if="info" bordered>
+            <AListItem>
+              <AListItemMeta>
+                <template #avatar>
+                  <img
+                    :src="`https://openweathermap.org/img/w/${info.weather[0].icon}.png`"
+                    :alt="info.weather[0].description"
+                    width="32px"
+                    height="32px"
+                  >
+                </template>
+                <template #title>
+                  <span class="description">{{ info.weather[0].description }}</span>
+                </template>
+                <template #description>{{ info.main.temp }} °C</template>
+              </AListItemMeta>
+            </AListItem>
+            <AListItem>
+              <AListItemMeta>
+                <template #avatar>
+                  <IconThermometer/>
+                </template>
+                <template #title>Feels like</template>
+                <template #description>{{ info.main.feels_like }} °C</template>
+              </AListItemMeta>
+            </AListItem>
+            <AListItem>
+              <AListItemMeta>
+                <template #avatar>
+                  <IconThermometerExterior/>
+                </template>
+                <template #title>Min/Max</template>
+                <template #description>{{ info.main.temp_min }}/{{ info.main.temp_max }} °C</template>
+              </AListItemMeta>
+            </AListItem>
+            <AListItem>
+              <AListItemMeta>
+                <template #avatar>
+                  <IconHumidity/>
+                </template>
+                <template #title>Humidity</template>
+                <template #description>{{ info.main.humidity }} %</template>
+              </AListItemMeta>
+            </AListItem>
+            <AListItem>
+              <AListItemMeta>
+                <template #avatar>
+                  <IconWind/>
+                </template>
+                <template #title>Wind</template>
+                <template #description>{{ info.wind.speed }} m/s</template>
+              </AListItemMeta>
+            </AListItem>
+          </AList>
+          <ASkeleton v-else :loading="isLoading" active avatar/>
+        </div>
+      </ACard>
     </ALayoutContent>
   </ALayout>
 </template>
@@ -107,15 +109,16 @@ const getWeather = async () => {
 .wrapper {
   width: 100%;
   max-width: 400px;
-  padding: 16px;
   margin: 16px auto;
+}
+
+.inner {
   display: grid;
   gap: 16px;
-  border-radius: 20px;
-  background-color: #fff;
 }
 
 .title {
+  margin: 0;
   text-align: center;
 }
 </style>
