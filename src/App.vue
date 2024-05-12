@@ -100,7 +100,7 @@ const getWeather = async () => {
 
 <style scoped>
 .content {
-  min-height: 100vh;
+  height: 100dvh;
   padding: 16px;
 }
 
